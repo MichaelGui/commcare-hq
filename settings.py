@@ -923,14 +923,16 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 DIGEST_LOGIN_FACTORY = 'django_digest.NoEmailLoginFactory'
 
 # Django Compressor
+#COMPRESS_ENABLED = False
 COMPRESS_PRECOMPILERS = AVAILABLE_COMPRESS_PRECOMPILERS = (
     ('text/less', 'corehq.apps.hqwebapp.precompilers.LessFilter'),
     ('text/scss', 'corehq.apps.hqwebapp.precompilers.SassFilter'),
 )
 # if not overwritten in localsettings, these will be replaced by the value they return
 # using the local DEBUG value (which we don't have access to here yet)
-COMPRESS_ENABLED = lambda: not DEBUG and not UNIT_TESTING  # noqa: E731
-COMPRESS_OFFLINE = lambda: not DEBUG and not UNIT_TESTING  # noqa: E731
+#COMPRESS_ENABLED = lambda: not DEBUG and not UNIT_TESTING  # noqa: E731
+#COMPRESS_OFFLINE = lambda: not DEBUG and not UNIT_TESTING  # noqa: E731
+#COMPRESS_OFFLINE = False
 COMPRESS_FILTERS = {
     'css': [
         'compressor.filters.css_default.CssAbsoluteFilter',
@@ -1200,7 +1202,8 @@ if UNIT_TESTING:
     #     COMPRESS_PRECOMPILERS=settings.AVAILABLE_COMPRESS_PRECOMPILERS,
     # )
     COMPRESS_PRECOMPILERS = ()
-
+#COMPRESS_COMPILERS = []
+#COMPRESS_PRECOMPILERS = ()
 
 # Unless DISABLE_SERVER_SIDE_CURSORS has explicitly been set, default to True because Django >= 1.11.1 and our
 # hosting environments use pgBouncer with transaction pooling. For more information, see:
